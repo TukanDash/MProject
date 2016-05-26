@@ -1,6 +1,6 @@
 
 --
--- Base de datos: `dreamlist`
+-- Base de datos: `Mproject`
 --
 
 -- --------------------------------------------------------
@@ -9,14 +9,14 @@
 -- Estructura de tabla para la tabla `participante`
 --
 
-CREATE TABLE IF NOT EXISTS `participante` (
-  `id_participante` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `proyecto` (
+  `id_proyecto` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(85) NOT NULL,
-  `color` varchar(42) NOT NULL,
-  `total_prestado` decimal(8,2) DEFAULT 0,
-  `total_adquirido` decimal(8,2) DEFAULT 0,
-  `num_regalos` int(11) DEFAULT 0,
-  PRIMARY KEY (`id_participante`),
+  `descripcion` text,
+  `porcentaje` decimal(6,2) DEFAULT 0.00,
+  `closed` boolean DEFAULT 0,
+  --`num_proyectos` int(11) DEFAULT 0,
+  PRIMARY KEY (`id_proyecto`),
   KEY `i_nombre` (`nombre`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1001 ;
 
@@ -24,13 +24,13 @@ CREATE TABLE IF NOT EXISTS `participante` (
 -- Volcado de datos para la tabla `participante`
 --
 
-INSERT INTO `participante` (`id_participante`, `nombre`, `color`, `num_regalos`) VALUES
-(1001, 'David', '#01DF01;', 2),
-(1002, 'Aly', '#0101DF;', 0),
-(1003, 'Elena', '#B45F04;', 0),
-(1004, 'Noelia', '#FFFF00;', 0),
-(1005, 'Mama', '#81BEF7;', 0),
-(1006, 'Papa', '#FF0000;', 0);
+INSERT INTO `proyecto` (`id_proyecto`, `nombre`, `descripcion`) VALUES
+(1001, 'Proyecto01');
+(1002, 'Proyecto02');
+(1003, 'Proyecto03');
+(1004, 'Proyecto04');
+(1005, 'Proyecto05');
+(1006, 'Proyecto06');
 
 -- --------------------------------------------------------
 
