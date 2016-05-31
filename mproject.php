@@ -22,7 +22,7 @@ class mproject
 
       $db_selected = "USE ".$DB;
       mysql_query($db_selected,$this->id_conexion);
-  }
+   }
    
    function __destruct() 
    {
@@ -31,6 +31,43 @@ class mproject
    }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   function listado_completo()
+   {
+	   
+   }
+   function crea($nombre,$desc=null)
+   {
+	   
+   }
+   function modifica($arg)
+   {
+	   
+   }
+   function borra($arg)
+   {
+	   
+   }
+   function crea_proyecto($nombre)
+   {
+	   
+   }
+   function crea_actividad($nombre)
+   {
+	   
+   }
+   function crea_tarea($nombre)
+   {
+	   
+   }
+   function modifica_proyecto($id,$nombre,$descripcion,$)
+   {
+	   
+   }
+   function borra_proyecto($id)
+   {
+	   
+   }
+   
 /*
    function dameResultado($consulta) 
    {

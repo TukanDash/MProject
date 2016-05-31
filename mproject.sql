@@ -41,11 +41,11 @@ CREATE TABLE IF NOT EXISTS `proyecto` (
 --
 
 INSERT INTO `proyecto` (`id_proyecto`, `nombre`) VALUES
-(1001, 'Proyecto01');
-(1002, 'Proyecto02');
-(1003, 'Proyecto03');
-(1004, 'Proyecto04');
-(1005, 'Proyecto05');
+(1001, 'Proyecto01'),
+(1002, 'Proyecto02'),
+(1003, 'Proyecto03'),
+(1004, 'Proyecto04'),
+(1005, 'Proyecto05'),
 (1006, 'Proyecto06');
 
 -- --------------------------------------------------------
@@ -74,11 +74,11 @@ CREATE TABLE IF NOT EXISTS `actividad` (
 --
 
 INSERT INTO `actividad` (`id_actividad`, `nombre`, `id_proyect`) VALUES
-(10001, 'Actividad01', 1001);
-(10002, 'Actividad02', 1002);
-(10003, 'Actividad03', 1002);
-(10004, 'Actividad04', 1003);
-(10005, 'Actividad05', 1004);
+(10001, 'Actividad01', 1001),
+(10002, 'Actividad02', 1002),
+(10003, 'Actividad03', 1002),
+(10004, 'Actividad04', 1003),
+(10005, 'Actividad05', 1004),
 (10006, 'Actividad06', 1004);
 
 
@@ -106,22 +106,22 @@ CREATE TABLE IF NOT EXISTS `tarea` (
 -- Volcado de datos para la tabla `tarea`
 --
 
-INSERT INTO `actividad` (`id_actividad`, `nombre`, `id_proyect`) VALUES
-(100001, 'Tarea01', 10001);
-(100002, 'Tarea02', 10002);
-(100003, 'Tarea03', 10002);
-(100004, 'Tarea04', 10003);
-(100005, 'Tarea05', 10004);
-(100006, 'Tarea06', 10004);
-(100007, 'Tarea07', 10001);
-(100008, 'Tarea08', 10005);
-(100009, 'Tarea09', 10005);
-(100010, 'Tarea10', 10005);
-(100011, 'Tarea11', 10005);
-(100012, 'Tarea12', 10006);
-(100013, 'Tarea13', 10006);
-(100014, 'Tarea14', 10003);
-(100015, 'Tarea15', 10002);
-(100016, 'Tarea16', 10003);
-(100017, 'Tarea17', 10004);
+INSERT INTO `tarea` (`id_tarea`, `nombre`, `id_act`) VALUES
+(100001, 'Tarea01', 10001),
+(100002, 'Tarea02', 10002),
+(100003, 'Tarea03', 10002),
+(100004, 'Tarea04', 10003),
+(100005, 'Tarea05', 10004),
+(100006, 'Tarea06', 10004),
+(100007, 'Tarea07', 10001),
+(100008, 'Tarea08', 10005),
+(100009, 'Tarea09', 10005),
+(100010, 'Tarea10', 10005),
+(100011, 'Tarea11', 10005),
+(100012, 'Tarea12', 10006),
+(100013, 'Tarea13', 10006),
+(100014, 'Tarea14', 10003),
+(100015, 'Tarea15', 10002),
+(100016, 'Tarea16', 10003),
+(100017, 'Tarea17', 10004),
 (100018, 'Tarea18', 10004);
