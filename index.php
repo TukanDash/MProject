@@ -19,6 +19,11 @@
 
   </head>
   <body>
+
+    <?php
+    include 'mproject.php';
+    ?>
+
     <div class="panel panel-default" style="margin: auto auto; width:500px">
       <!-- Default panel contents -->
       <div class="panel-heading">Panel heading</div>
