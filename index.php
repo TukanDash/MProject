@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>Gestion de Proyectos - MProject</title>
 
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -21,18 +21,18 @@
   <body>
 
     <?php
-    include 'mproject.php';
+    //include 'mproject.php';
     ?>
-
+<!--
     <div class="panel panel-default" style="margin: auto auto; width:500px">
       <!-- Default panel contents -->
-      <div class="panel-heading">Panel heading</div>
+      <!--<div class="panel-heading">Panel heading</div>
       <div class="panel-body">
         <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
       </div>
 
       <!-- List group -->
-      <ul class="list-group">
+      <!--<ul class="list-group">
         <li class="list-group-item">Cras justo odio</li>
         <li class="list-group-item">Dapibus ac facilisis in</li>
         <li class="list-group-item">Morbi leo risus</li>
@@ -40,6 +40,40 @@
         <li class="list-group-item">Vestibulum at eros</li>
       </ul>
     </div>
+
+
+
+-->
+
+<?php
+
+//// TEST DATABASE.PHP
+/// ==============================
+/*
+include "Database.php";
+
+$db = Database::getConnection("MySqlProvider");
+//$resultados = $db->execute('SELECT * FROM proyecto WHERE nombre="Proyecto01"');
+$resultados = $db->execute('SELECT * FROM proyecto');
+print_r($resultados);
+
+*/
+
+//// TEST ORM.PHP
+/// ==============================
+
+include "orm.php";
+
+$resultados = ORM::all();
+if($resultados)
+  print_r($resultados);
+else
+  print("NO NOOOOO")
+
+
+?>
+
+
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

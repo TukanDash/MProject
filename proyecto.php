@@ -26,3 +26,5 @@ class Provincia extends ORM {
         $this->nombre = isset($data['nombre']) ? $data['nombre'] : null;
     }
 }
+
+?>

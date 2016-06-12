@@ -9,7 +9,10 @@ class ORM {
     }
     private static function getConnection() {
         require_once ('Database.php');
-        self::$database = Database::getConnection(DB_PROVIDER, DB_HOST, DB_USER, DB_PASSWORD, DB_DB);
+        require ('config.php');
+        //self::$database = Database::getConnection(DB_PROVIDER, DB_HOST, DB_USER, DB_PASSWORD, DB_DB);
+        //self::$database = Database::getConnection("MySQL", "localhost", "root", "", "mproject");
+        self::$database = Database::getConnection($provider);
     }
     public static function find($id) {
         $results = self::where('id', $id);
