@@ -62,15 +62,23 @@ print_r($resultados);
 //// TEST ORM.PHP
 /// ==============================
 
-include "orm.php";
+include "proyecto.php";
 
-$resultados = ORM::all();
+$resultados = proyecto::all();
+print_r($resultados);
+
+print("</br></br>");
+//$resultados = proyecto::find('1005');
+$resultados[4]->nombre = "PROYECTO05";
+/*
 if($resultados)
   print_r($resultados);
 else
   print("NO NOOOOO")
-
-
+*/
+$resultados[4]->save();
+$resultado2 = proyecto::find('1005');
+print_r($resultado2);
 ?>
 
 

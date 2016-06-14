@@ -14,8 +14,9 @@ class ORM {
         //self::$database = Database::getConnection("MySQL", "localhost", "root", "", "mproject");
         self::$database = Database::getConnection($provider);
     }
-    public static function find($id) {
-        $results = self::where('id', $id);
+    public static function find($id) {   //Los metodos estáticos: no es necesario crear una instancia para poder usarlos.
+        $field= 'id_'. static ::$table;
+        $results = self::where($field, $id);
         return $results[0];
     }
     public static function where($field, $value) {
@@ -47,22 +48,24 @@ class ORM {
         }
         return $objs;
     }
-    public function save() {
+    public function save() {   //En el caso de la función save (que no esestática), si es necesario instanciar un objeto para poder usar el método.
         $values = get_object_vars($this);
         $filtered = null;
         foreach ($values as $key => $value) {
-            if ($value !== null && $value !== '' && strpos($key, 'obj_') === false && $key !== 'id') {
+            if ($value !== null && $value !== '' && strpos($key, 'obj_') === false && $key !== 'id_'. static ::$table) {
                 if ($value === false) {
                     $value = 0;
                 }
+                if($key == "id")
+                    $key = "id_". static ::$table;
                 $filtered[$key] = $value;
             }
-        }
+        } 
         $columns = array_keys($filtered);
         if ($this->id) {
             $columns = join(" = ?, ", $columns);
             $columns.= ' = ?';
-            $query = "UPDATE " . static ::$table . " SET $columns WHERE id =" . $this->id;
+            $query = "UPDATE " . static ::$table . " SET $columns WHERE id_". static ::$table ." =" . $this->id;
         } else {
             $params = join(", ", array_fill(0, count($columns), "?"));
             $columns = join(", ", $columns);
@@ -74,6 +77,8 @@ class ORM {
         } else {
             $result = array('error' => true, 'message' => self::$database->getError());
         }
+        //print("</br></br>");
+        //print_r($result);
         return $result;
     }
 }

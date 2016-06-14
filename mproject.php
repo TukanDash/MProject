@@ -33,7 +33,10 @@ class mproject
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    function listado_completo()
    {
-	   
+	    // Método que lista los objetos proyecto, actividad y tarea de forma iterativa
+      //
+      //for
+      var_dump() 
    }
    function crea($nombre,$desc=null)
    {
