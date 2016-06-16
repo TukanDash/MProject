@@ -9,7 +9,7 @@
 
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="custom/css/styles.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -19,67 +19,67 @@
 
   </head>
   <body>
-
-    <?php
-    //include 'mproject.php';
-    ?>
-<!--
-    <div class="panel panel-default" style="margin: auto auto; width:500px">
-      <!-- Default panel contents -->
-      <!--<div class="panel-heading">Panel heading</div>
+    <div class="panel panel-default" id="panel-proyectos">
+      <div class="panel-heading"><h2>Panel de navegaci&oacute;n de Proyectos</h2></div>
       <div class="panel-body">
-        <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-      </div>
+        <div class="list-group">
 
-      <!-- List group -->
-      <!--<ul class="list-group">
-        <li class="list-group-item">Cras justo odio</li>
-        <li class="list-group-item">Dapibus ac facilisis in</li>
-        <li class="list-group-item">Morbi leo risus</li>
-        <li class="list-group-item">Porta ac consectetur ac</li>
-        <li class="list-group-item">Vestibulum at eros</li>
-      </ul>
-    </div>
+  <?php
+
+        include_once "proyecto.php";
+        require_once "actividad.php";
+        $proyectos = proyecto::all();
+        
+        foreach ($proyectos as $proyecto)
+        {
+          $where_proyect=actividad::where("id_proyect",$proyecto->id);
+          $num_actividades=count($where_proyect);
+          print('
+        <a href="#" class="list-group-item">
+            <span class="badge">'.$num_actividades.' Act</span>
+            <h4 class="list-group-item-heading">'.$proyecto->nombre.'</h4>
+            <p class="list-group-item-text">'.$proyecto->descripcion.'</p>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="'.
+              intval($proyecto->porcentaje).'" aria-valuemin="0" aria-valuemax="100" style="width: '.
+              intval($proyecto->porcentaje).'%; min-width: 2em;">'.intval($proyecto->porcentaje).'%
+                <span class="sr-only">'.intval($proyecto->porcentaje).'% Complete</span>
+              </div>
+            </div>
+            <a href="#" class="btn btn-default" role="button">
+              <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+            </a>
+            <div id="desglose-act"></div>
+          </a>
+
+      ');
+        }
+          
+
+  ?>
+
+  <!--
+          <a href="#" class="list-group-item active">
+            <span class="badge">5</span>
+            <h4 class="list-group-item-heading">List group item heading</h4>
+            <p class="list-group-item-text">Dapibus ac facilisis in Dapibus ac facilisis in Dapibus ac facilisis in</p>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%; min-width: 2em;">0%
+                <span class="sr-only">45% Complete</span>
+              </div>
+            </div>
+            <div id="desglose-act"></div>
+          </a>
+
+  -->
+        </div>
+  </div>
+</div>
 
 
+    
 
--->
 
-<?php
-
-//// TEST DATABASE.PHP
-/// ==============================
-/*
-include "Database.php";
-
-$db = Database::getConnection("MySqlProvider");
-//$resultados = $db->execute('SELECT * FROM proyecto WHERE nombre="Proyecto01"');
-$resultados = $db->execute('SELECT * FROM proyecto');
-print_r($resultados);
-
-*/
-
-//// TEST ORM.PHP
-/// ==============================
-
-include "proyecto.php";
-
-$resultados = proyecto::all();
-print_r($resultados);
-
-print("</br></br>");
-//$resultados = proyecto::find('1005');
-$resultados[4]->nombre = "PROYECTO05";
-/*
-if($resultados)
-  print_r($resultados);
-else
-  print("NO NOOOOO")
-*/
-$resultados[4]->save();
-$resultado2 = proyecto::find('1005');
-print_r($resultado2);
-?>
 
 
 
@@ -87,5 +87,7 @@ print_r($resultado2);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="custom/js/custom.js"></script>
+
   </body>
 </html>
