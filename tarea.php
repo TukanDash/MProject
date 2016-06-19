@@ -7,8 +7,6 @@ require_once ("ORM.php");
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-//}   
-
 class tarea extends ORM {  
     public $id, $nombre, $descripcion, $done, $id_act;
     protected static $table = 'tarea';

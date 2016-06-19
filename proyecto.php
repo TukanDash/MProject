@@ -5,9 +5,7 @@ require_once ("ORM.php");
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-//}   
+ 
 
 class proyecto extends ORM {  
     public $id, $nombre, $descripcion, $porcentaje, $estado, $archived, $es_proceso;

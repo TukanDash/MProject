@@ -9,7 +9,9 @@ class ORM {
     }
     private static function getConnection() {
         require_once ('Database.php');
-        require ('config.php');
+        require ('config.php');  // -> Este archivo config es necesario que no dependa de ORM.php, sino de Database.php, de tal forma que
+        //todo lo relativo a la conexión forme parte del nivel de abstracción de Database.php (provider, host, user, password, dbname).
+        
         //self::$database = Database::getConnection(DB_PROVIDER, DB_HOST, DB_USER, DB_PASSWORD, DB_DB);
         //self::$database = Database::getConnection("MySQL", "localhost", "root", "", "mproject");
         self::$database = Database::getConnection($provider);
@@ -19,7 +21,7 @@ class ORM {
         $results = self::where($field, $id);
         return $results[0];
     }
-    public static function where($field, $value) {
+    public static function where($field, $value, $order = null) {
         $obj = null;
         self::getConnection();
         $query = "SELECT * FROM " . static ::$table . " WHERE " . $field . " = ?";
@@ -77,8 +79,17 @@ class ORM {
         } else {
             $result = array('error' => true, 'message' => self::$database->getError());
         }
-        //print("</br></br>");
-        //print_r($result);
+        return $result;
+    }
+
+    public function delete($id) {  //
+        $query = "DELETE FROM " . static ::$table . " WHERE id_". static ::$table ." =" . $id;
+        $result = self::$database->execute($query);
+        if ($result) {
+            $result = array('error' => false, 'message' => self::$database->getInsertedID()); /////Este getInsertedID() deberia de ser modificado por getDeletedID();
+        } else {
+            $result = array('error' => true, 'message' => self::$database->getError());
+        }
         return $result;
     }
 }

@@ -26,34 +26,17 @@
 
   <?php
 
-        include_once "proyecto.php";
-        require_once "actividad.php";
-        $proyectos = proyecto::all();
+       require "mproject.php";
+       $mproject = mproject::listado_completo(false);
         
-        foreach ($proyectos as $proyecto)
-        {
-          $where_proyect=actividad::where("id_proyect",$proyecto->id);
-          $num_actividades=count($where_proyect);
-          print('
-        <a href="#" class="list-group-item">
-            <span class="badge">'.$num_actividades.' Act</span>
-            <h4 class="list-group-item-heading">'.$proyecto->nombre.'</h4>
-            <p class="list-group-item-text">'.$proyecto->descripcion.'</p>
-            <div class="progress">
-              <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="'.
-              intval($proyecto->porcentaje).'" aria-valuemin="0" aria-valuemax="100" style="width: '.
-              intval($proyecto->porcentaje).'%; min-width: 2em;">'.intval($proyecto->porcentaje).'%
-                <span class="sr-only">'.intval($proyecto->porcentaje).'% Complete</span>
-              </div>
-            </div>
-            <a href="#" class="btn btn-default" role="button">
-              <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-            </a>
-            <div id="desglose-act"></div>
-          </a>
-
-      ');
-        }
+        //print("</br></br></br>");
+        //$datos["nombre"] = "Proba";
+        //$new_proyect = new proyecto($datos);
+        //$new_proyect->save();
+        //
+        //
+        //$proyectos = proyecto::delete("1007");
+        //print_r($proyectos);
           
 
   ?>
