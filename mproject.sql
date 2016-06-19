@@ -34,19 +34,19 @@ CREATE TABLE IF NOT EXISTS `proyecto` (
   `es_proceso` boolean DEFAULT 0,
   PRIMARY KEY (`id_proyecto`),
   KEY `i_nombre_pro` (`nombre`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1001 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1001 ;
 
 --
 -- Volcado de datos para la tabla `proyecto`
 --
 
-INSERT INTO `proyecto` (`id_proyecto`, `nombre`) VALUES
-(1001, 'Proyecto01'),
-(1002, 'Proyecto02'),
-(1003, 'Proyecto03'),
-(1004, 'Proyecto04'),
-(1005, 'Proyecto05'),
-(1006, 'Proyecto06');
+INSERT INTO `proyecto` (`id_proyecto`, `nombre`, `descripcion`) VALUES
+(1001, 'Proyecto01', 'Descripción generada automáticamente para el proyecto.'),
+(1002, 'Proyecto02', 'Descripción generada automáticamente para el proyecto.'),
+(1003, 'Proyecto03', 'Descripción generada automáticamente para el proyecto.'),
+(1004, 'Proyecto04', 'Descripción generada automáticamente para el proyecto.'),
+(1005, 'Proyecto05', 'Descripción generada automáticamente para el proyecto.'),
+(1006, 'Proyecto06', 'Descripción generada automáticamente para el proyecto.');
 
 -- --------------------------------------------------------
 
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `actividad` (
   PRIMARY KEY (`id_actividad`),
   FOREIGN KEY (`id_proyect`) REFERENCES proyecto(id_proyecto) ON UPDATE CASCADE ON DELETE CASCADE,
   KEY `i_nombre_act` (`nombre`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10001 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10001 ;
 
 --
 -- Volcado de datos para la tabla `actividad`
@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `tarea` (
   PRIMARY KEY (`id_tarea`),
   FOREIGN KEY (`id_act`) REFERENCES actividad(id_actividad) ON UPDATE CASCADE ON DELETE CASCADE,
   KEY `i_nombre_tar` (`nombre`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100001 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=100001 ;
 
 --
 -- Volcado de datos para la tabla `tarea`

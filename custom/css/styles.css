@@ -3,13 +3,9 @@
 	width: 40%;
 }
 
-#panel-proyectos .list-group-item {
-	margin: 0 4em 0 0;
-}
-#panel-proyectos a.btn {
-    float: right;
-    border-radius: 8px;
-    margin-top: -55px;
+#panel-tareas {
+	
+	width: 50%;
 }
 
 p+.progress {
