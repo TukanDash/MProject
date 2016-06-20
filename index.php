@@ -24,6 +24,21 @@
   <?php
 
        require "mproject.php";
+
+
+       if(isset($_GET['accion']) && $_GET['accion']!='')
+       {
+          if(($_GET['accion'] == "borra_pro") || ($_GET['accion'] == "borra_act") || ($_GET['accion'] == "borra_tar")){
+            mproject::borra($_GET['accion'], $_GET['id']);
+          }
+          if(($_GET['accion'] == "mod_pro") || ($_GET['accion'] == "mod_act") || ($_GET['accion'] == "mod_tar")){
+            mproject::putData($_GET['accion'],$_POST);
+          }
+          if(($_GET['accion'] == "nuevo_pro") || ($_GET['accion'] == "nuevo_act") || ($_GET['accion'] == "nuevo_tar")){
+            mproject::putData($_GET['accion'],$_POST);
+          }
+
+       }
        mproject::mainList();
   
   ?>

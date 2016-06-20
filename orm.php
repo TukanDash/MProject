@@ -82,7 +82,8 @@ class ORM {
         return $result;
     }
 
-    public function delete($id) {  //
+    public static function delete($id) {  //
+        self::getConnection();
         $query = "DELETE FROM " . static ::$table . " WHERE id_". static ::$table ." =" . $id;
         $result = self::$database->execute($query);
         if ($result) {

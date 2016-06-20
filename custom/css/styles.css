@@ -1,6 +1,19 @@
+body {
+	background-color: #EDF2F7;
+}
+
 #panel-proyectos {
 	margin: 2% 0 0 2%;
 	width: 40%;
+}
+
+#panel-proyectos .list-group-item-text {
+    margin-bottom: 1em;
+}
+
+#panel-proyectos .btn-group {
+	float: right;
+	display: inline-block;
 }
 
 #panel-tareas {

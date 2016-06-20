@@ -3,6 +3,9 @@
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+require_once "proyecto.php";
+require_once "actividad.php";
+require_once "tarea.php";
 
 class mproject {
 
@@ -17,8 +20,7 @@ class mproject {
 
     private static function getData() {
         require_once "preferences.php";
-        require_once "proyecto.php";
-        require_once "actividad.php";
+        
 
         if ($archived)  //Esto cambia el listado principal segun las preferencias. Lo mejor seria cambiar la funcion were para que admitiera mas de un filtro.
           self::$proyectos = proyecto::all();
@@ -27,6 +29,7 @@ class mproject {
 
         //$where_proyect=actividad::where("id_proyect",$proyecto->id);
         self::$actividades=actividad::all();
+        self::$tareas=tarea::all();
         //print_r(self::$actividades);
 
     }
@@ -40,7 +43,7 @@ class mproject {
 
         print('
         <div class="panel panel-default" id="panel-proyectos">
-          <div class="panel-heading"><h2>Panel de navegaci&oacute;n de Proyectos</h2></div>
+          <div class="panel-heading"><h2>Navegaci&oacute;n de Proyectos&nbsp;&nbsp;<a href="form_pro.php"><span class="label label-success">New</span></a></h2></div>
           <div class="panel-body">
             <div class="list-group">');
 
@@ -54,8 +57,10 @@ class mproject {
           $num_actividades=count($actividadesPro);
           print('
                     <a role="button" href="#collapse'.$proyecto->id.'" aria-expanded="false" id="'.$proyecto->id.'" class="list-group-item" data-toggle="collapse" data-parent="#panel_proyectos" aria-controls="collapse'.$proyecto->id.'">
+
                       <span class="badge">'.$num_actividades.' Act</span>
-                      <h4 class="list-group-item-heading">'.$proyecto->nombre.'</h4>
+                      <h4 class="list-group-item-heading">'.$proyecto->nombre.'&nbsp;<span class="label label-success">'.$proyecto->estado.'</span></h4>
+
                       <p class="list-group-item-text">'.$proyecto->descripcion.'</p>
             
                     <div class="progress">
@@ -65,8 +70,28 @@ class mproject {
                         <span class="sr-only">'.intval($proyecto->porcentaje).'% Complete</span>
                       </div>
                     </div>
-
+                    
                     </a>
+
+
+                     <!--    --------------------------------------------------------------------- -->    
+                        <div class="btn-group btn-group-xs" role="group">
+                          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Opciones
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">Nueva Aplicaci&oacute;n</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="form_pro.php?id='.$proyecto->id.'">Editar</a></li>
+                            <li><a href="index.php?accion=borra_pro&id='.$proyecto->id.'">Borrar</a></li>
+                            <li><a href="#">Archivar</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Ver desglose</a></li>
+                          </ul>
+                        </div>
+
+
 
                     <div id="collapse'.$proyecto->id.'" class="desplegado panel-collapse collapse in" role="tabpanel" aria-labelledby="'.$proyecto->id.'">
                       <div class="panel-body">
@@ -105,28 +130,8 @@ class mproject {
                            </div>
                           </div>
                         </div>
-                    
-
-
-
-                            <div class="btn-group" role="group" aria-label="...">
-                              <button type="button" class="btn btn-default">Left</button>
-                              <div class="btn-group" role="group">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                  Opciones
-                                  <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                  <li><a href="#">Nueva Aplicaci&oacute;n</a></li>
-                                  <li role="separator" class="divider"></li>
-                                  <li><a href="form_pro.php?id='.$proyecto->id.'">Editar</a></li>
-                                  <li><a href="#">Borrar</a></li>
-                                  <li><a href="#">Archivar</a></li>
-                                  <li role="separator" class="divider"></li>
-                                  <li><a href="#">Ver desglose</a></li>
-                                </ul>
-                              </div>
-                            </div>
+                       
+                           
 
           '); 
 
@@ -146,18 +151,73 @@ class mproject {
     private function recalcular() {
       //Para el caso en el que se inserte, actualice o borre un dato.
       //
-     
+      
       //->save
     }
 
 
 
-   public static function borra($id)
+   public static function borra($accion, $id)
    {
-	    
+          $cadena=self::checktable($accion);
+          $cadena::delete($id);
    }
   
-   
+   public static function putData($str,$array)
+   {
+      $table=self::checktable($str);
+      $accion = self::checkaccion($str);
+      $obj=self::setData($table, $accion, $array);
+      $obj->save();
+   }
+   public static function checktable($accion){
+    $accion=substr($accion,-3);
+    if($accion=="pro")
+      $accion="proyecto";
+    if($accion=="act")
+      $accion="actividad";
+    if($accion=="tar")
+      $accion="tarea";
+
+      return $accion;
+   }
+   public static function checkaccion($accion){
+    $accion=substr($accion, 3);
+    if($accion=="nue")
+      $accion="nuevo";
+    if($accion=="mod")
+      $accion="modifica";
+
+
+      return $accion;
+   }
+
+
+   public static function setData($tabla,$accion,$array){
+    if($accion == "modifica")
+      $obj = $tabla::find($array["id"]);
+    else
+      $obj=new $tabla($array);
+    if($tabla="proyecto")
+    {
+      $obj->nombre=$array["nombre"];
+      $obj->descripcion=$array["descripcion"];
+      $obj->estado=$array["estado"];
+      if(isset($array["proceso"]))
+        $obj->es_proceso=true;
+    }
+    if($tabla="actividad"){
+
+    }
+
+    if($tabla=="tarea"){
+
+    }
+
+
+
+      return $obj;
+   }
 
    
 } // fin de la clase
