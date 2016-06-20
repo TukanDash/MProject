@@ -122,104 +122,109 @@ class mproject {
                 
                 ');
                 
-               
             }
               
             print('
                           
-                           </div>
-                          </div>
-                        </div>
+                       </div>
+                      </div>
+                    </div>
                        
-                           
-
           '); 
 
         }
         print('
 
-        </div>
-      </div>
-    </div>');
+            </div>
+          </div>
+        </div>');
 
 
     }
 
-    
-   //private function 
 
-    private function recalcular() {
-      //Para el caso en el que se inserte, actualice o borre un dato.
-      //
-      
-      //->save
-    }
+  private function recalcular() {
+    //Para el caso en el que se inserte, actualice o borre un dato.
+    // 
 
+    // Recalculo de estados
+    //
+    // Recalculo de contadores
+    //
+    // Recalculo de porcentajes
+    // 
+    // 
+    // //->save
+  }
 
-
-   public static function borra($accion, $id)
-   {
-          $cadena=self::checktable($accion);
-          $cadena::delete($id);
-   }
+  public static function borra($accion, $id) {
+    $cadena=self::checktable($accion);
+    $cadena::delete($id);
+  }
   
-   public static function putData($str,$array)
-   {
-      $table=self::checktable($str);
-      $accion = self::checkaccion($str);
-      $obj=self::setData($table, $accion, $array);
-      $obj->save();
-   }
-   public static function checktable($accion){
-    $accion=substr($accion,-3);
-    if($accion=="pro")
-      $accion="proyecto";
-    if($accion=="act")
-      $accion="actividad";
-    if($accion=="tar")
-      $accion="tarea";
+  public static function putData($str,$array) {
+    $table=self::checktable($str);
+    $accion = self::checkaccion($str);
+    // $array = filterData($array)   // Esta funcion puede crearse aqui o dentro de setData, de forma que se realice un filtrado de lo introducido por el usuario antes de enviarlo al ORM para realizar la persistencia de datos.
+    $obj=self::setData($table, $accion, $array);
+    $obj->save();
+  }
 
-      return $accion;
-   }
-   public static function checkaccion($accion){
-    $accion=substr($accion, 3);
-    if($accion=="nue")
-      $accion="nuevo";
-    if($accion=="mod")
-      $accion="modifica";
+  private static function checktable($str) {
+    $str=substr($str,-3);
+    if($str=="pro")
+      $str="proyecto";
+    if($str=="act")
+      $str="actividad";
+    if($str=="tar")
+      $str="tarea";
 
+    return $str;
+  }
 
-      return $accion;
-   }
+  private static function checkaccion($str) {
+    $str=substr($str, 0, 3);
+    if($str=="nue")
+      $str="nuevo";
+    elseif($str=="mod")
+      $str="modifica";
 
+    return $str;
+  }
 
-   public static function setData($tabla,$accion,$array){
+  private static function setData($tabla,$accion,$array) {
+    //print("Tabla: ".$tabla." || Accion: ".$accion);
     if($accion == "modifica")
       $obj = $tabla::find($array["id"]);
     else
       $obj=new $tabla($array);
-    if($tabla="proyecto")
-    {
+
+    if($tabla="proyecto") {
       $obj->nombre=$array["nombre"];
       $obj->descripcion=$array["descripcion"];
       $obj->estado=$array["estado"];
       if(isset($array["proceso"]))
         $obj->es_proceso=true;
     }
-    if($tabla="actividad"){
-
+    elseif ($tabla="actividad") {
+      $obj->nombre=$array["nombre"];
+      $obj->descripcion=$array["descripcion"];
+      $obj->estado=$array["estado"];
+      if(isset($array["proceso"]))
+        $obj->es_proceso=true;
     }
 
-    if($tabla=="tarea"){
-
+    elseif ($tabla=="tarea") {
+      $obj->nombre=$array["nombre"];
+      $obj->descripcion=$array["descripcion"];
+      $obj->estado=$array["estado"];
+      if(isset($array["proceso"]))
+        $obj->es_proceso=true;
     }
 
-
-
-      return $obj;
-   }
-
-   
+    return $obj;
+  }
+ 
 } // fin de la clase
    
 ?>
