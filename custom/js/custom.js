@@ -1,3 +1,11 @@
-$(document).ready(function(){
-   $('.desplegado').collapse('hide');
-});
+//$(document).ready(function ocultaDesoculta());
+
+
+/*
+
+ function ocultaWrapper() {
+  $('.desplegado').collapse('hide');
+}
+
+
+*/

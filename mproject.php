@@ -35,7 +35,13 @@ class mproject {
         self::getData();
         print('
         <div class="panel panel-default" id="panel-proyectos">
-          <div class="panel-heading"><h2>Navegaci&oacute;n de Proyectos&nbsp;&nbsp;<a href="form_pro.php"><span class="label label-primary">Nuevo...</span></a></h2></div>
+          <div class="panel-heading">
+            <h3 class=""><strong>Lista de Proyectos</strong>&nbsp;&nbsp;
+              <a href="form_pro.php">
+                <span class="label label-primary"><span class="glyphicon glyphicon-plus "></span>&nbsp;Nuevo</span>
+              </a>
+            </h3>
+          </div>
           <div class="panel-body">
             <div class="list-group">');
 
@@ -44,7 +50,7 @@ class mproject {
           $actividadesPro=actividad::where("id_proyect",$proyecto->id);
           $num_actividades=count($actividadesPro);
           print('
-                    <a role="button" href="#collapse'.$proyecto->id.'" aria-expanded="false" id="'.$proyecto->id.'" class="list-group-item" data-toggle="collapse" data-parent="#panel_proyectos" aria-controls="collapse'.$proyecto->id.'">
+                    <a role="button" href="#collapse'.$proyecto->id.'" aria-expanded="false" id="'.$proyecto->id.'" class="list-group-item" data-toggle="collapse" data-parent="#panel_proyectos" aria-controls="collapse'.$proyecto->id.'" onclick="ocultaWrapper()">
 
                       <span class="badge">'.$num_actividades.' Act</span>
                       <h4 class="list-group-item-heading">'.$proyecto->nombre.'&nbsp;<span class="label label-success">'.$proyecto->estado.'</span></h4>
@@ -81,7 +87,7 @@ class mproject {
 
 
 
-                    <div id="collapse'.$proyecto->id.'" class="desplegado panel-collapse collapse in" role="tabpanel" aria-labelledby="'.$proyecto->id.'">
+                    <div id="collapse'.$proyecto->id.'" class="desplegado panel-collapse collapse" role="tabpanel" aria-labelledby="'.$proyecto->id.'">
                       <div class="panel-body">
                           <div class="list-group">'
             );
@@ -110,6 +116,57 @@ class mproject {
                           </a>
                 
                 ');
+
+
+                      print('
+                                 <!-----------------------------------------------------------------------   TAREAS ----------------------------------------
+                                  
+                                  <!-- Table -->
+                                    <div id="collapse'.$actividad->id.'" class="collapse table-responsive">
+                                      <caption>Lista de tareas de la Actividad [Actividad]</caption>
+                                      <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                          <tr>
+                                            <td>#</td>
+                                            <td>Nombre</td> 
+                                            <td>Descripci&oacute;n</td>
+                                            <td>Hecho</td>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                        ');
+                            
+                    
+                                              $num=1;
+                                              foreach ($tareasAct as $tarea) {
+                                                print('
+                                                <tr>
+                                                  <td>'.$num.'</td>
+                                                  <td>'.$tarea->nombre.'</td> 
+                                                  <td>'.$tarea->descripcion.'</td>');
+                                                if($tarea->done == '1')
+                                                  print('
+                                                  <td><span class="glyphicon glyphicon-ok-circle"></span></td>');
+                                                else
+                                                  print('
+                                                  <td>-</td>');
+                                                print('
+                                                </tr>');
+                                                  $num++;
+
+                                              }
+                                          print('
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  
+
+                                  ');
+
+
+
+
+
                 
             }
               

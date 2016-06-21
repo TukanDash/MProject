@@ -4,9 +4,12 @@ body {
 
 #panel-proyectos {
 	margin: 2% 0 0 2%;
-	width: 40%;
+	width: 70%;
 }
 
+#panel-proyectos .panel-heading {
+	
+}
 #panel-proyectos .list-group-item-text {
     margin-bottom: 1em;
 }
@@ -17,10 +20,16 @@ body {
 }
 
 #panel-tareas {
+	margin-top: 2%;
+}
+#panel-tareas table {
 	
-	width: 50%;
 }
 
 p+.progress {
 	margin: 5px 0 0 0;
+}
+
+@-moz-document url-prefix() {
+  fieldset { display: table-cell; }
 }
