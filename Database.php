@@ -12,7 +12,6 @@ class Database {
         require ('config.php');
         $this->provider = new $provider;
         $this->provider->connect($host, $user, $pass, $db);
-        //$this->provider->connect("localhost", "root", "", "mproject");
         if (!$this->provider->isConnected()) {
             throw new Exception("We couldn't connect to the database >> $db");
         } else {

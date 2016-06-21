@@ -50,7 +50,7 @@ class ORM {
         }
         return $objs;
     }
-    public function save() {   //En el caso de la función save (que no esestática), si es necesario instanciar un objeto para poder usar el método.
+    public function save() {   //En el caso de la función save (que no es estática), si es necesario instanciar un objeto para poder usar el método.
         $values = get_object_vars($this);
         $filtered = null;
         foreach ($values as $key => $value) {

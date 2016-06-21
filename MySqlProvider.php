@@ -2,7 +2,7 @@
 //   Nombre del fichero: MySqlProvider.php
 
 require_once ('DatabaseProvider.php');
-require_once ('config.php');
+//require_once ('config.php');
 class MySqlProvider extends DatabaseProvider {  
     public function connect($host, $user, $pass, $db) {
         $this->resource = new mysqli($host, $user, $pass, $db);

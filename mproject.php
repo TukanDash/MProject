@@ -43,7 +43,7 @@ class mproject {
 
         print('
         <div class="panel panel-default" id="panel-proyectos">
-          <div class="panel-heading"><h2>Navegaci&oacute;n de Proyectos&nbsp;&nbsp;<a href="form_pro.php"><span class="label label-success">New</span></a></h2></div>
+          <div class="panel-heading"><h2>Navegaci&oacute;n de Proyectos&nbsp;&nbsp;<a href="form_pro.php"><span class="label label-primary">Nuevo...</span></a></h2></div>
           <div class="panel-body">
             <div class="list-group">');
 
@@ -104,10 +104,11 @@ class mproject {
             {
             //  
                 //print_r($actividadesPro);
-                
+                $tareasAct=tarea::where("id_act",$actividad->id);
+                $num_tareas=count($tareasAct);
                 print('
                           <a href="#collapse'.$actividad->id.'" id="'.$actividad->id.'" class="list-group-item" data-toggle="collapse" data-parent="#panel_proyectos" aria-controls="collapse'.$actividad->id.'">
-                             <span class="badge">'.' Tareas</span>
+                             <span class="badge">'.$num_tareas.' Tareas</span>
                              <h4 class="list-group-item-heading">'.$actividad->nombre.'</h4>
                              <p class="list-group-item-text">'.$actividad->descripcion.'</p>
                     
