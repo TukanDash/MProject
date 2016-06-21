@@ -27,7 +27,7 @@
 
       <div class="panel-heading"><h2>Editar Actividad</h2></div>
         <div class="panel-body">
-			<form action="index.php?accion=mod_pro" method="POST" class="form-horizontal">
+			<form action="index.php?accion=mod_act" method="POST" class="form-horizontal">
 			<input type="hidden" name="id" value="'.$actividad->id.'">
 			  <div class="form-group">
 			    <label for="inputNombre" class="col-sm-2 control-label">Nombre</label>

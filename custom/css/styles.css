@@ -3,20 +3,31 @@ body {
 }
 
 #panel-proyectos {
-	margin: 2% 0 0 2%;
+	margin: auto auto;
+	margin-top: 2%;
 	width: 70%;
 }
 
 #panel-proyectos .panel-heading {
 	
 }
+#panel-proyectos .list-group-item {
+	clear: both;
+}
 #panel-proyectos .list-group-item-text {
-    margin-bottom: 1em;
+    margin-bottom: 2em;
 }
 
 #panel-proyectos .btn-group {
-	float: right;
-	display: inline-block;
+    
+    float: right;
+	-display: inline-block;
+
+	
+}
+
+.desplegado {
+	width: 90%;
 }
 
 #panel-tareas {

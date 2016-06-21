@@ -25,7 +25,7 @@
 
        require "mproject.php";
 
-
+       
        if(isset($_GET['accion']) && $_GET['accion']!='')
        {
           if(($_GET['accion'] == "borra_pro") || ($_GET['accion'] == "borra_act") || ($_GET['accion'] == "borra_tar")){
