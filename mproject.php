@@ -20,27 +20,19 @@ class mproject {
 
     private static function getData() {
         require_once "preferences.php";
-        
-
         if ($archived)  //Esto cambia el listado principal segun las preferencias. Lo mejor seria cambiar la funcion were para que admitiera mas de un filtro.
           self::$proyectos = proyecto::all();
         else
           self::$proyectos = proyecto::where("archived",$archived);
 
-        //$where_proyect=actividad::where("id_proyect",$proyecto->id);
         self::$actividades=actividad::all();
         self::$tareas=tarea::all();
-        //print_r(self::$actividades);
-
     }
    
     public static function mainList() {
 	      // Método que lista los objetos proyecto, actividad y tarea de forma iterativa
         // Llamamos a la funcion inicial para que pinte la vista principal
-    
         self::getData();
-        
-
         print('
         <div class="panel panel-default" id="panel-proyectos">
           <div class="panel-heading"><h2>Navegaci&oacute;n de Proyectos&nbsp;&nbsp;<a href="form_pro.php"><span class="label label-primary">Nuevo...</span></a></h2></div>
@@ -49,10 +41,6 @@ class mproject {
 
         foreach (self::$proyectos as $proyecto)
         {
-           //print_r($proyecto);
-           //print("Hola");
-
-          
           $actividadesPro=actividad::where("id_proyect",$proyecto->id);
           $num_actividades=count($actividadesPro);
           print('
@@ -81,11 +69,11 @@ class mproject {
                             <span class="caret"></span>
                           </button>
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a href="#">Nueva Aplicaci&oacute;n</a></li>
+                            <li><a href="form_act.php?id_proyect='.$proyecto->id.'">Nueva Actividad</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="form_pro.php?id='.$proyecto->id.'">Editar</a></li>
                             <li><a href="index.php?accion=borra_pro&id='.$proyecto->id.'">Borrar</a></li>
-                            <li><a href="#">Archivar</a></li>
+                            <li><a href="index.php?accion=archiva_pro&id='.$proyecto->id.'">Archivar</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#">Ver desglose</a></li>
                           </ul>
@@ -189,28 +177,37 @@ class mproject {
       $str="nuevo";
     elseif($str=="mod")
       $str="modifica";
+	elseif($str=="arc")
+	 $str="archiva";
 
     return $str;
   }
 
   private static function setData($tabla,$accion,$array) {
     //print("Tabla: ".$tabla." || Accion: ".$accion);
-    if($accion == "modifica")
+    if($accion == "modifica" || $accion == "archiva")
       $obj = $tabla::find($array["id"]);
     else
       $obj=new $tabla($array);
 
-    if($tabla="proyecto") {
+    if($tabla="proyecto" && $accion == "modifica") {
       $obj->nombre=$array["nombre"];
       $obj->descripcion=$array["descripcion"];
       $obj->estado=$array["estado"];
       if(isset($array["proceso"]))
         $obj->es_proceso=true;
     }
+	elseif($tabla="proyecto" && $accion == "archiva"){
+		$obj->archived=true;
+	}
     elseif ($tabla="actividad") {
+		if($accion=="nuevo"){
+			$obj->nombre=$array["nombre"];
+			$obj->descripcion=$array["descripcion"];
+			$obj->id_proyect=$array["id_proyect"];
+		}
       $obj->nombre=$array["nombre"];
       $obj->descripcion=$array["descripcion"];
-      $obj->estado=$array["estado"];
       if(isset($array["proceso"]))
         $obj->es_proceso=true;
     }

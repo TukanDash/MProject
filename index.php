@@ -37,6 +37,8 @@
           if(($_GET['accion'] == "nuevo_pro") || ($_GET['accion'] == "nuevo_act") || ($_GET['accion'] == "nuevo_tar")){
             mproject::putData($_GET['accion'],$_POST);
           }
+		  if($_GET['accion'] == "archiva_pro")
+			mproject::putData($_GET['accion'],$_GET);
 
        }
        mproject::mainList();
